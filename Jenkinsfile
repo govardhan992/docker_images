@@ -20,6 +20,7 @@ pipeline {
         sh "docker ps -a"
         sh "docker logs webserver"
        sh "docker rmi -f apache:${BUILD_NUMBER}"
+       sh"docker images"
       }
     }
   }
