@@ -14,7 +14,9 @@ pipeline {
     }
     stage('build container') {
       steps {
+        sh "docker rm -f webserver || true"
         sh "docker run -d -p 8081:8081 --name webserver apache:${BUILD_NUMBER}"
+        sh "docker ps -a"
       }
     }
   }
