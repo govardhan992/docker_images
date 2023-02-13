@@ -1,0 +1,13 @@
+pipeline{
+   agent any
+    tools{
+     git 'git-2.39.1' 
+    }
+   stages{
+     stage('tools_version'){
+       steps{
+         sh 'git --version'
+        }
+     }
+   }
+}
