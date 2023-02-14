@@ -16,10 +16,8 @@ pipeline {
     stage('build container') {
       steps {
         sh "docker rm -f webserver || true"
-        sh "docker run -d -p 8081:8081 --name webserver apache:${BUILD_NUMBER}"
+        sh "docker run -d -p 8081:8080 --name webserver apache:${BUILD_NUMBER}"
         sh "docker ps -a"
-        sh "docker logs webserver"
-       sh "docker rmi -f apache:${BUILD_NUMBER}"
        sh"docker images"
       }
     }
