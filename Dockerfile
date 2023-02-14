@@ -1,7 +1,5 @@
 FROM ubuntu:12.04
 
-MAINTAINER Valaxy Technologies valaxytech@gmail.com
-
 RUN apt-get update && apt-get install -y apache2 && apt-get clean
 
 ENV APACHE_RUN_USER www-data
