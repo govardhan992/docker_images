@@ -1,7 +1,9 @@
-FROM ubuntu 
-RUN apt update 
-RUN apt install –y apache2 
-RUN apt install –y apache2-utils 
-RUN apt clean 
-EXPOSE 80
-CMD [“apache2ctl”, “-D”, “FOREGROUND”]
+FROM centos
+RUN yum install java -y
+RUN mkdir /opt/tomcat/
+WORKDIR /opt/tomcat
+ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz /opt/tomcat
+RUN tar xvfz apache*.tar.gz
+RUN mv apache-tomcat-9.0.54/* /opt/tomcat 
+EXPOSE 8080
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
