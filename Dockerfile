@@ -1,9 +1,14 @@
-FROM centos:latest
-RUN yum install java -y
-RUN mkdir /opt/tomcat
-WORKDIR /opt/tomcat
-ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.71.tar.gz
-RUN tar -xvzf apache-tomcat-9.0.71.tar.gz
-RUN mv apache-tomcat-9.0.71/* /opt/tomcat
-EXPOSE 8080
-CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+FROM ubuntu:12.04
+
+MAINTAINER Valaxy Technologies valaxytech@gmail.com
+
+RUN apt-get update && apt-get install -y apache2 && apt-get clean
+
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log/apache2
+
+EXPOSE 80
+
+COPY index.html /var/www/html
+CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
